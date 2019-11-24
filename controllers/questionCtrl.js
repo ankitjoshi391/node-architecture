@@ -1,86 +1,86 @@
-const questionDBAPI = require('../db_apis/questionDB.js');
+// const questionDBAPI = require('../db_apis/questionDB.js');
 
-async function getQuestion(req, res, next){
-  try {
-    const context = {};
+// async function getQuestion(req, res, next){
+//   try {
+//     const context = {};
 
-    context.id = parseInt(req.params.id, 10);
-    // context.sort = req.query.sort;
-    
-    const questions = await questionDBAPI.find(context);
-    const rows = await questionDBAPI.getOptionsArray(questions);
+//     context.id = parseInt(req.params.id, 10);
+//     // context.sort = req.query.sort;
 
-    if (req.params.id) {
-      if (rows.length === 1) {
-        res.status(200).json(rows[0]);
-      } else {
-        res.status(404).end();
-      }
-    } else {
-      res.status(200).json(rows);
-    }
-  } catch (err) {
-    next(err);
-  }
-}
+//     const questions = await questionDBAPI.find(context);
+//     const rows = await questionDBAPI.getOptionsArray(questions);
 
-function getQuestionFromReq(req) {
-  const question = {
-    question: req.body.question,
-    response_type: req.body.responseType,
-    options: req.body.options
-  };
+//     if (req.params.id) {
+//       if (rows.length === 1) {
+//         res.status(200).json(rows[0]);
+//       } else {
+//         res.status(404).end();
+//       }
+//     } else {
+//       res.status(200).json(rows);
+//     }
+//   } catch (err) {
+//     next(err);
+//   }
+// }
 
-  return question;
-}
+// function getQuestionFromReq(req) {
+//   const question = {
+//     question: req.body.question,
+//     response_type: req.body.responseType,
+//     options: req.body.options
+//   };
 
-async function createQuestion(req, res, next) {
-  try {
-    let question = getQuestionFromReq(req);
+//   return question;
+// }
 
-    question = await questionDBAPI.create(question);
+// async function createQuestion(req, res, next) {
+//   try {
+//     let question = getQuestionFromReq(req);
 
-    res.status(201).json(question);
-  } catch (err) {
-    next(err);
-  }
-}
+//     question = await questionDBAPI.create(question);
 
-async function updateQuestion(req, res, next) {
-  try {
-    let question = getQuestionFromReq(req);
+//     res.status(201).json(question);
+//   } catch (err) {
+//     next(err);
+//   }
+// }
 
-    question.question_id = parseInt(req.params.id, 10);
+// async function updateQuestion(req, res, next) {
+//   try {
+//     let question = getQuestionFromReq(req);
 
-    question = await questionDBAPI.update(question);
+//     question.question_id = parseInt(req.params.id, 10);
 
-    if (question !== null) {
-      res.status(200).json(question);
-    } else {
-      res.status(404).end();
-    }
-  } catch (err) {
-    next(err);
-  }
-}
+//     question = await questionDBAPI.update(question);
 
-async function deleteQuestion(req, res, next) {
-  try {
-    const id = parseInt(req.params.id, 10);
+//     if (question !== null) {
+//       res.status(200).json(question);
+//     } else {
+//       res.status(404).end();
+//     }
+//   } catch (err) {
+//     next(err);
+//   }
+// }
 
-    const success = await questionDBAPI.delete(id);
+// async function deleteQuestion(req, res, next) {
+//   try {
+//     const id = parseInt(req.params.id, 10);
 
-    if (success) {
-      res.status(204).end();
-    } else {
-      res.status(404).end();
-    }
-  } catch (err) {
-    next(err);
-  }
-}
+//     const success = await questionDBAPI.delete(id);
 
-module.exports.getQuestion = getQuestion;
-module.exports.createQuestion = createQuestion;
-module.exports.updateQuestion = updateQuestion;
-module.exports.deleteQuestion = deleteQuestion;
+//     if (success) {
+//       res.status(204).end();
+//     } else {
+//       res.status(404).end();
+//     }
+//   } catch (err) {
+//     next(err);
+//   }
+// }
+
+// module.exports.getQuestion = getQuestion;
+// module.exports.createQuestion = createQuestion;
+// module.exports.updateQuestion = updateQuestion;
+// module.exports.deleteQuestion = deleteQuestion;

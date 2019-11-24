@@ -1,5 +1,5 @@
 const webServer = require("./services/WSService.js");
-const database = require("./services/dbService.js");
+// const database = require("./services/dbService.js");
 
 async function startup() {
   console.log("Starting application");
@@ -42,15 +42,15 @@ async function shutdown(e) {
     err = err || e;
   }
 
-  try {
-    console.log("Closing database module");
+  // try {
+  //   console.log("Closing database module");
 
-    await database.close();
-  } catch (e) {
-    console.error(e);
+  //   await database.close();
+  // } catch (e) {
+  //   console.error(e);
 
-    err = err || e;
-  }
+  //   err = err || e;
+  // }
 
   console.log("Exiting process");
 
