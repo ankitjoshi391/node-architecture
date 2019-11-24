@@ -1,0 +1,9 @@
+version: "2"
+services:
+  app:
+    image: ddf_node:latest
+    container_name: ddf_node
+    restart: always
+    build: .
+    ports:
+      - "9999:9999"
